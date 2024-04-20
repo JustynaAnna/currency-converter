@@ -31,3 +31,28 @@ const calculateExchangeRate = (data, baseCurrency, currency2) => {
   rateInfo.textContent = `1 ${baseCurrency} = ${rate.toFixed(4)} ${currency2}`;
   amountTwo.value = (amountOne.value * rate).toFixed(2);
 };
+
+const validateInputValue = () => {
+  const inputValue = amountOne.value;
+  const isValid = /^[0-9]*([.,][0-9]*)?$/.test(inputValue);
+  const errorMessage = document.querySelector(".input-error");
+  if (!isValid) {
+    errorMessage.style.display = "block";
+    errorMessage.textContent = "Please enter a valid amount";
+  } else {
+    errorMessage.textContent = "";
+    errorMessage.style.display = "none";
+  }
+};
+
+const handleExchange = async () => {
+  try {
+    const { data, baseCurrency, currency2 } = await fetchExchangeData();
+
+    calculateExchangeRate(data, baseCurrency, currency2);
+    validateInputValue();
+  } catch (error) {
+    const errorMessage = document.querySelector(".error-message");
+    errorMessage.textContent = error.message;
+  }
+};
