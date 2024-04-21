@@ -48,7 +48,7 @@ const validateInputValue = () => {
 const handleExchange = async () => {
   try {
     const { data, baseCurrency, currency2 } = await fetchExchangeData();
-
+    currenciesList(data, currency2);
     calculateExchangeRate(data, baseCurrency, currency2);
     validateInputValue();
   } catch (error) {
@@ -56,3 +56,17 @@ const handleExchange = async () => {
     errorMessage.textContent = error.message;
   }
 };
+
+const swap = () => {
+  [currencyOne.value, currencyTwo.value] = [
+    currencyTwo.value,
+    currencyOne.value,
+  ]; // destrukturyzacja pozwala na zmianę miejsca wartości
+  fetchExchangeData();
+};
+
+currencyOne.addEventListener("change", handleExchange);
+currencyTwo.addEventListener("change", handleExchange);
+amountOne.addEventListener("input", handleExchange);
+swapBtn.addEventListener("click", swap);
+handleExchange();
