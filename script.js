@@ -57,6 +57,56 @@ const handleExchange = async () => {
   }
 };
 
+const currenciesList = (data, currency2) => {
+  const popularCurrencies = [
+    "PLN",
+    "EUR",
+    "USD",
+    "GBP",
+    "JPY",
+    "AUD",
+    "CAD",
+    "CHF",
+  ];
+
+  const currenciesCode = Object.keys(data.rates);
+  const popularGroup = document.createElement("optgroup");
+  popularGroup.label = "Popular";
+  const otherGroup = document.createElement("optgroup");
+  otherGroup.label = "Other";
+
+  // Iteruję po popularCurrencies by sprawdzic, czy dany kod waluty istnieje w danych
+  //jak tak to tworzę listę z tych walut
+  for (const currencyCode of popularCurrencies) {
+    if (currenciesCode.includes(currencyCode)) {
+      const option = document.createElement("option");
+      option.value = currencyCode;
+      option.textContent = currencyCode;
+      popularGroup.appendChild(option);
+    }
+  }
+  // Iteruje po wszystkich kodach walut i dodaje do grupy otherGroup te, które nie należą do popularCurrencies
+  for (const currencyCode of currenciesCode) {
+    if (!popularCurrencies.includes(currencyCode)) {
+      const option = document.createElement("option");
+      option.value = currencyCode;
+      option.textContent = currencyCode;
+      otherGroup.appendChild(option);
+    }
+  }
+  // Muszę sklonować, bo przecież nie mogę mieć jednego el. w dwóch miejsach
+  currencyOne.appendChild(popularGroup);
+  currencyOne.appendChild(otherGroup);
+  currencyTwo.appendChild(popularGroup.cloneNode(true)); // Nie klonujemy popularGroup, ponieważ chcemy, aby była ta sama instancja
+  currencyTwo.appendChild(otherGroup.cloneNode(true));
+
+  // Ustawienie wartości domyślnej dla currencyTwo na currency2, jeśli base_code to "PLN"
+  //inaczej mam PLN PLN
+  if (data.base_code === "PLN") {
+    currencyTwo.value = currency2;
+  }
+};
+
 const swap = () => {
   [currencyOne.value, currencyTwo.value] = [
     currencyTwo.value,
