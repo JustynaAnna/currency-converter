@@ -14,15 +14,18 @@ const fetchExchangeData = async () => {
 
   try {
     const response = await fetch(apiUrl + `?apikey=${apiKey}`);
-    if (!response.ok) {
-      throw new Error(`Error! Status: ${response.status}`);
+    if (!response) {
+      throw new Error(`Error fetching exchange rates. ${response.status}`);
     }
-    const data = await response.json();
-    console.log(data);
-    return { data, baseCurrency, currency2 };
+
+    return { response, baseCurrency, currency2 };
   } catch (error) {
-    const errorMessage = document.querySelector(".error-message");
-    errorMessage.textContent = `An error occured: ${error.message}`;
+    if (error instanceof TypeError && error.message === "Failed to fetch") {
+      console.log(error);
+      throw new Error(`Failed to connect to the server`);
+    } else {
+      throw new Error(`Failed to fetch exchange rates: ${error.message}`);
+    }
   }
 };
 
@@ -42,18 +45,6 @@ const validateInputValue = () => {
   } else {
     errorMessage.textContent = "";
     errorMessage.style.display = "none";
-  }
-};
-
-const handleExchange = async () => {
-  try {
-    const { data, baseCurrency, currency2 } = await fetchExchangeData();
-    currenciesList(data, currency2);
-    calculateExchangeRate(data, baseCurrency, currency2);
-    validateInputValue();
-  } catch (error) {
-    const errorMessage = document.querySelector(".error-message");
-    errorMessage.textContent = error.message;
   }
 };
 
@@ -113,6 +104,18 @@ const swap = () => {
     currencyOne.value,
   ]; // destrukturyzacja pozwala na zmianę miejsca wartości
   fetchExchangeData();
+};
+
+const handleExchange = async () => {
+  try {
+    const { data, baseCurrency, currency2 } = await fetchExchangeData();
+    currenciesList(data, currency2);
+    calculateExchangeRate(data, baseCurrency, currency2);
+    validateInputValue();
+  } catch (error) {
+    const errorMessage = document.querySelector(".error-message");
+    errorMessage.textContent = error.message;
+  }
 };
 
 currencyOne.addEventListener("change", handleExchange);
