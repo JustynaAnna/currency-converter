@@ -26,21 +26,26 @@
             title="Please enter the value in the correct format, e.g. 100.00"
           />
           <p class="input-error"></p>
+          <p class="api-error"></p>
           <!-- placeholder="enter amount" -->
-          <select id="currency-one"></select>
+          <div class="select-box">
+            <select id="currency-one"></select>
+          </div>
         </div>
         <button class="swap">
-          <i class="fas fa-retweet"></i>
+          <i class="fas fa-retweet">-</i>
         </button>
 
         <div class="section-right">
           <input type="number" class="amount-two" disabled />
-          <select id="currency-two"></select>
+          <div class="select-box-right">
+            <select id="currency-two"></select>
+          </div>
         </div>
       </div>
-      <p class="rate-info"></p>
+      <div class="info-container"><p class="rate-info"></p></div>
       <p class="error-message"></p>
     </div>
-    <script src="try.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

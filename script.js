@@ -4,21 +4,22 @@ const currencyTwo = document.querySelector("#currency-two");
 const amountTwo = document.querySelector(".amount-two");
 const swapBtn = document.querySelector(".swap");
 const rateInfo = document.querySelector(".rate-info");
-const apiKey = "444";
+const selectBoxLeft = document.querySelector(".select-box");
+const selectBoxRight = document.querySelector(".select-box-right");
+const apiKey = "ae187835fa5da279b910fcd0";
 
 const fetchExchangeData = async () => {
   const baseCurrency = currencyOne.value || "PLN";
   const currency2 = currencyTwo.value || "EUR";
-
   const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}`;
 
   try {
     const response = await fetch(apiUrl + `?apikey=${apiKey}`);
-    if (!response) {
+    if (!response.ok) {
       throw new Error(`Error fetching exchange rates. ${response.status}`);
     }
-
-    return { response, baseCurrency, currency2 };
+    const data = await response.json();
+    return { data, baseCurrency, currency2 };
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       console.log(error);
@@ -26,6 +27,24 @@ const fetchExchangeData = async () => {
     } else {
       throw new Error(`Failed to fetch exchange rates: ${error.message}`);
     }
+  }
+};
+
+const getFlags = async (currency) => {
+  try {
+    const apiURL = `https://restcountries.com/v3.1/currency/${currency}`;
+    const response = await fetch(apiURL);
+    if (!response.ok) {
+      throw new Error(`Error fetching flag for currency ${currency}.`);
+    }
+    const data = await response.json();
+    if (!data[0]?.flags?.svg) {
+      throw new Error(`Flag not found for currency ${currency}.`);
+    }
+    return data[0].flags.svg;
+  } catch (error) {
+    console.error(error);
+    return null; // Zwróć null, aby obsłużyć brakujące obrazy flagi
   }
 };
 
@@ -109,6 +128,47 @@ const swap = () => {
 const handleExchange = async () => {
   try {
     const { data, baseCurrency, currency2 } = await fetchExchangeData();
+
+    // Sprawdź, czy tag img dla baseCurrency już istnieje
+    let imgTagBaseCurrency = document.querySelector(".flag-img-base");
+    if (imgTagBaseCurrency) {
+      // Jeśli istnieje, zaktualizuj jego src
+      const flagURLBaseCurrency = await getFlags(baseCurrency);
+      if (flagURLBaseCurrency) {
+        imgTagBaseCurrency.src = flagURLBaseCurrency;
+      }
+    } else {
+      // Jeśli nie istnieje, stwórz nowy tag img dla baseCurrency
+      imgTagBaseCurrency = document.createElement("img");
+      imgTagBaseCurrency.className = "flag-img-base"; // Dodaj klasę, aby łatwo go znaleźć
+      const flagURLBaseCurrency = await getFlags(baseCurrency);
+      if (flagURLBaseCurrency) {
+        imgTagBaseCurrency.src = flagURLBaseCurrency;
+        imgTagBaseCurrency.style.width = "52px";
+        selectBoxLeft.appendChild(imgTagBaseCurrency);
+      }
+    }
+
+    // Sprawdź, czy tag img dla currency2 już istnieje
+    let imgTagCurrency2 = document.querySelector(".flag-img-currency2");
+    if (imgTagCurrency2) {
+      // Jeśli istnieje, zaktualizuj jego src
+      const flagURLCurrency2 = await getFlags(currency2);
+      if (flagURLCurrency2) {
+        imgTagCurrency2.src = flagURLCurrency2;
+      }
+    } else {
+      // Jeśli nie istnieje, stwórz nowy tag img dla currency2
+      imgTagCurrency2 = document.createElement("img");
+      imgTagCurrency2.className = "flag-img-currency2"; // Dodaj klasę, aby łatwo go znaleźć
+      const flagURLCurrency2 = await getFlags(currency2);
+      if (flagURLCurrency2) {
+        imgTagCurrency2.src = flagURLCurrency2;
+        imgTagCurrency2.style.width = "52px";
+        selectBoxRight.appendChild(imgTagCurrency2);
+      }
+    }
+
     currenciesList(data, currency2);
     calculateExchangeRate(data, baseCurrency, currency2);
     validateInputValue();
