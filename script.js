@@ -9,18 +9,22 @@ const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "4444";
 
-const fetchExchangeData = async () => {
+const fetchExchangeRates = async () => {
   const baseCurrency = baseCurrencySelect.value || "PLN";
-  const currency2 = targetCurrencySelect.value || "EUR";
-  const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}`;
+  const targetCurrency = targetCurrencySelect.value || "EUR";
+  const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}?apikey=${apiKey}`;
 
   try {
-    const response = await fetch(apiUrl + `?apikey=${apiKey}`);
-    if (!response.ok) {
-      throw new Error(`Error fetching exchange rates. ${response.status}`);
-    }
-    const data = await response.json();
-    return { data, baseCurrency, currency2 };
+    // USTAWIENIE LIMITU CZASU DLA ZAPYTANIA
+    errorMessage.textContent = "";
+    const currencyData = await fetchDataFromAPI(apiUrl, {
+      timeout: 5000,
+      onTimeout: () => {
+        errorMessage.textContent =
+          "Oops... something went wrong. Please reload the page to try again.";
+      },
+    });
+    return { currencyData, baseCurrency, targetCurrency };
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
       console.log(error);
@@ -31,21 +35,61 @@ const fetchExchangeData = async () => {
   }
 };
 
-const getFlags = async (currency) => {
+const flagCache = {};
+const fetchFlagSvg = async (currency) => {
   try {
-    const apiURL = `https://restcountries.com/v3.1/currency/${currency}`;
-    const response = await fetch(apiURL);
-    if (!response.ok) {
-      throw new Error(`Error fetching flag for currency ${currency}.`);
+    //Sprawdzanie, czy flaga dla danej waluty jest już w pamięci podręcznej
+    if (flagCache[currency]) {
+      console.log(`Flag for currency ${currency} found in cache`);
+      return flagCache[currency];
     }
-    const data = await response.json();
-    if (!data[0]?.flags?.svg) {
+    const apiURL = `https://restcountries.com/v3.1/currency/${currency}`;
+
+    const flagsSvgData = await fetchDataFromAPI(apiURL, {
+      timeout: 5000,
+      onTimeout: () => {
+        console.log("Timeout occurred while fetching flags data");
+      },
+    });
+    if (!flagsSvgData[0]?.flags?.svg) {
       throw new Error(`Flag not found for currency ${currency}.`);
     }
-    return data[0].flags.svg;
+    const flagSVG = flagsSvgData[0].flags.svg;
+    flagCache[currency] = flagSVG;
+    return flagSVG;
   } catch (error) {
     console.error(error);
-    return null; // Zwróć null, aby obsłużyć brakujące obrazy flagi
+    return null; // Zwraca null, aby zamiast rzucenia błędu program mógł nadal się wykonywać
+    //z informacją, że brak jest obrazka dla tej waluty. Nie zatrzymam programu
+  }
+};
+
+const fetchDataFromAPI = async (apiUrl, options = {}) => {
+  const { timeout, onTimeout } = options;
+  const controller = new AbortController();
+  const signal = controller.signal;
+
+  // Ustawienie limitu czasu dla zapytania
+  if (timeout) {
+    const timer = setTimeout(() => {
+      controller.abort();
+      if (onTimeout) {
+        onTimeout();
+      }
+    }, timeout);
+
+    signal.addEventListener("abort", () => {
+      clearTimeout(timer);
+    });
+  }
+  try {
+    const response = await fetch(apiUrl, { signal });
+    if (!response.ok) {
+      throw new Error(`Error fetching exchange rates. ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    throw new Error(`Failed to fetch data from API: ${error.message}`);
   }
 };
 
