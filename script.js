@@ -1,16 +1,17 @@
-const currencyOne = document.querySelector("#currency-one");
-const amountOne = document.querySelector(".amount-one");
-const currencyTwo = document.querySelector("#currency-two");
-const amountTwo = document.querySelector(".amount-two");
+const baseCurrencySelect = document.querySelector("#base-currency");
+const baseAmountInput = document.querySelector(".amount-input");
+const targetCurrencySelect = document.querySelector("#target-currency");
+const targetAmountInput = document.querySelector(".target-amount-input");
 const swapBtn = document.querySelector(".swap");
-const rateInfo = document.querySelector(".rate-info");
-const selectBoxLeft = document.querySelector(".select-box");
-const selectBoxRight = document.querySelector(".select-box-right");
-const apiKey = "ae187835fa5da279b910fcd0";
+const exchangeRateInfo = document.querySelector(".exchange-rate-info");
+const baseFlagsBox = document.querySelector(".base-flags-box");
+const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
+const errorMessage = document.querySelector(".error-message");
+const apiKey = "4444";
 
 const fetchExchangeData = async () => {
-  const baseCurrency = currencyOne.value || "PLN";
-  const currency2 = currencyTwo.value || "EUR";
+  const baseCurrency = baseCurrencySelect.value || "PLN";
+  const currency2 = targetCurrencySelect.value || "EUR";
   const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}`;
 
   try {
@@ -50,12 +51,14 @@ const getFlags = async (currency) => {
 
 const calculateExchangeRate = (data, baseCurrency, currency2) => {
   const rate = data.rates[currency2];
-  rateInfo.textContent = `1 ${baseCurrency} = ${rate.toFixed(4)} ${currency2}`;
-  amountTwo.value = (amountOne.value * rate).toFixed(2);
+  exchangeRateInfo.textContent = `1 ${baseCurrency} = ${rate.toFixed(
+    4
+  )} ${currency2}`;
+  targetAmountInput.value = (baseAmountInput.value * rate).toFixed(2);
 };
 
 const validateInputValue = () => {
-  const inputValue = amountOne.value;
+  const inputValue = baseAmountInput.value;
   const isValid = /^[0-9]*([.,][0-9]*)?$/.test(inputValue);
   const errorMessage = document.querySelector(".input-error");
   if (!isValid) {
@@ -105,22 +108,22 @@ const currenciesList = (data, currency2) => {
     }
   }
   // Muszę sklonować, bo przecież nie mogę mieć jednego el. w dwóch miejsach
-  currencyOne.appendChild(popularGroup);
-  currencyOne.appendChild(otherGroup);
-  currencyTwo.appendChild(popularGroup.cloneNode(true)); // Nie klonujemy popularGroup, ponieważ chcemy, aby była ta sama instancja
-  currencyTwo.appendChild(otherGroup.cloneNode(true));
+  baseCurrencySelect.appendChild(popularGroup);
+  baseCurrencySelect.appendChild(otherGroup);
+  targetCurrencySelect.appendChild(popularGroup.cloneNode(true)); // Nie klonujemy popularGroup, ponieważ chcemy, aby była ta sama instancja
+  targetCurrencySelect.appendChild(otherGroup.cloneNode(true));
 
-  // Ustawienie wartości domyślnej dla currencyTwo na currency2, jeśli base_code to "PLN"
+  // Ustawienie wartości domyślnej dla targetCurrencySelect na currency2, jeśli base_code to "PLN"
   //inaczej mam PLN PLN
   if (data.base_code === "PLN") {
-    currencyTwo.value = currency2;
+    targetCurrencySelect.value = currency2;
   }
 };
 
 const swap = () => {
-  [currencyOne.value, currencyTwo.value] = [
-    currencyTwo.value,
-    currencyOne.value,
+  [baseCurrencySelect.value, targetCurrencySelect.value] = [
+    targetCurrencySelect.value,
+    baseCurrencySelect.value,
   ]; // destrukturyzacja pozwala na zmianę miejsca wartości
   fetchExchangeData();
 };
@@ -145,7 +148,7 @@ const handleExchange = async () => {
       if (flagURLBaseCurrency) {
         imgTagBaseCurrency.src = flagURLBaseCurrency;
         imgTagBaseCurrency.style.width = "52px";
-        selectBoxLeft.appendChild(imgTagBaseCurrency);
+        baseFlagsBox.appendChild(imgTagBaseCurrency);
       }
     }
 
@@ -165,7 +168,7 @@ const handleExchange = async () => {
       if (flagURLCurrency2) {
         imgTagCurrency2.src = flagURLCurrency2;
         imgTagCurrency2.style.width = "52px";
-        selectBoxRight.appendChild(imgTagCurrency2);
+        targetfetchFlagSvgBox.appendChild(imgTagCurrency2);
       }
     }
 
@@ -178,8 +181,8 @@ const handleExchange = async () => {
   }
 };
 
-currencyOne.addEventListener("change", handleExchange);
-currencyTwo.addEventListener("change", handleExchange);
-amountOne.addEventListener("input", handleExchange);
+baseCurrencySelect.addEventListener("change", handleExchange);
+targetCurrencySelect.addEventListener("change", handleExchange);
+baseAmountInput.addEventListener("input", handleExchange);
 swapBtn.addEventListener("click", swap);
 handleExchange();
