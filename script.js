@@ -2,6 +2,7 @@ const baseCurrencySelect = document.querySelector("#base-currency");
 const baseAmountInput = document.querySelector(".amount-input");
 const targetCurrencySelect = document.querySelector("#target-currency");
 const targetAmountInput = document.querySelector(".target-amount-input");
+const convertBtn = document.querySelector(".convert");
 const swapBtn = document.querySelector(".swap");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const baseFlagsBox = document.querySelector(".base-flags-box");
@@ -9,6 +10,7 @@ const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835fa5da279b910fcd0";
 
+console.log(targetAmountInput.value); //Dlaczego drukuje się nic?
 const fetchExchangeRates = async () => {
   const baseCurrency = baseCurrencySelect.value || "PLN";
   const targetCurrency = targetCurrencySelect.value || "EUR";
@@ -145,7 +147,12 @@ const swap = () => {
     targetCurrencySelect.value,
     baseCurrencySelect.value,
   ]; // destrukturyzacja pozwala na zmianę miejsca wartości
-  fetchExchangeRates();
+  [baseAmountInput.value, targetAmountInput.value] = [
+    targetAmountInput.value,
+    baseAmountInput.value,
+  ];
+  // calculateExchangeRate();
+  // fetchExchangeRates();
 };
 
 const displayCountryFlags = async (baseCurrency, targetCurrency) => {
@@ -160,6 +167,7 @@ const displayCountryFlags = async (baseCurrency, targetCurrency) => {
     const flagURL = await fetchFlagSvg(currency);
     if (flagURL) {
       imgTag.src = flagURL;
+      imgTag.alt = currency;
     }
   };
 
@@ -187,6 +195,6 @@ const updateExchangeDetails = async () => {
 
 baseCurrencySelect.addEventListener("change", updateExchangeDetails);
 targetCurrencySelect.addEventListener("change", updateExchangeDetails);
-baseAmountInput.addEventListener("input", updateExchangeDetails);
+convertBtn.addEventListener("click", updateExchangeDetails);
 swapBtn.addEventListener("click", swap);
 updateExchangeDetails();

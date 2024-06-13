@@ -32,12 +32,20 @@
             <select id="base-currency"></select>
           </div>
         </div>
-        <button class="swap">
-          <i class="fas fa-retweet"></i>
-        </button>
+        <div>
+          <button class="convert">Convert</button>
+          <button class="swap" title="Switch currencies" type="button">
+            <i class="fas fa-retweet"></i>
+          </button>
+        </div>
 
         <div class="section-right">
-          <input type="number" class="target-amount-input" disabled />
+          <input
+            type="number"
+            class="target-amount-input"
+            title="Result"
+            disabled
+          />
           <div class="target-flags-box">
             <select id="target-currency"></select>
           </div>
@@ -46,6 +54,7 @@
       <p class="exchange-rate-info"></p>
       <p class="error-message"></p>
     </div>
+    <!-- <p>Flagi dostarczone przez <a href="https://flagpedia.net">Flagpedia.net</a></p> -->
     <script src="script.js"></script>
   </body>
 </html>
