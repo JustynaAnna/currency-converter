@@ -10,14 +10,12 @@ const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835f5ada279b910fcd0";
 
-console.log(targetAmountInput.value); //Dlaczego drukuje się nic?
 const fetchExchangeRates = async () => {
   const baseCurrency = baseCurrencySelect.value || "PLN";
   const targetCurrency = targetCurrencySelect.value || "EUR";
   const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}?apikey=${apiKey}`;
 
   try {
-    // USTAWIENIE LIMITU CZASU DLA ZAPYTANIA
     errorMessage.textContent = "";
     const currencyData = await fetchDataFromAPI(apiUrl);
     console.log(currencyData);
