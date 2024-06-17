@@ -8,7 +8,7 @@ const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 const baseFlagsBox = document.querySelector(".base-flags-box");
 const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
 const errorMessage = document.querySelector(".error-message");
-const apiKey = "ae187835fa5da279b910fcd0";
+const apiKey = "ae187835f5ada279b910fcd0";
 
 console.log(targetAmountInput.value); //Dlaczego drukuje się nic?
 const fetchExchangeRates = async () => {
@@ -20,6 +20,7 @@ const fetchExchangeRates = async () => {
     // USTAWIENIE LIMITU CZASU DLA ZAPYTANIA
     errorMessage.textContent = "";
     const currencyData = await fetchDataFromAPI(apiUrl);
+    console.log(currencyData);
     return { currencyData, baseCurrency, targetCurrency };
   } catch (error) {
     if (error instanceof TypeError && error.message === "Failed to fetch") {
@@ -151,8 +152,7 @@ const swap = () => {
     targetAmountInput.value,
     baseAmountInput.value,
   ];
-  // calculateExchangeRate();
-  // fetchExchangeRates();
+  fetchExchangeRates(); //wywołuję ta f. na baseCurrencySelect na "change", a i tak musze tutaj, dlaczego?
 };
 
 const displayCountryFlags = async (baseCurrency, targetCurrency) => {
