@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="test.css" />
+    <link rel="stylesheet" href="style.css" />
     <script
       src="https://kit.fontawesome.com/7c39d39f84.js"
       crossorigin="anonymous"
@@ -11,48 +11,63 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="wrapper">
-      <h1>Exchange Rate</h1>
-      <p>Check current exchange rates</p>
+    <div class="app-wrapper">
+      <h1>Currency Converter</h1>
+      <p>Select currencies and check the exchange rate</p>
 
       <div class="app-body">
-        <div class="section-left">
-          <label for="amount-one">Amount</label>
-          <input
-            type="text"
-            class="amount-input"
-            value="1"
-            inputmode="tel"
-            title="Please enter the value in the correct format, e.g. 100.00"
-          />
+        <div class="left-section">
+          <div class="input-wrapper-from styled-box">
+            <label for="amount-input-from" class="label-from">From</label>
+            <input
+              type="text"
+              id="amount-input-from"
+              class="input-amount-from"
+              value="1"
+              inputmode="tel"
+              title="Please enter the value in the correct format, e.g. 100.00"
+            />
+          </div>
           <p class="input-error"></p>
           <p class="api-error"></p>
           <!-- placeholder="enter amount" -->
-          <div class="base-flags-box">
-            <select id="base-currency"></select>
+          <div class="flags-box-from styled-box">
+            <select
+              id="base-currency"
+              class="select-base-currency"
+              aria-label="Base Currency"
+            ></select>
           </div>
         </div>
-        <div>
-          <button class="convert">Convert</button>
+        <div class="button-wrapper-swap">
           <button class="swap" title="Switch currencies" type="button">
             <i class="fas fa-retweet"></i>
           </button>
         </div>
 
-        <div class="section-right">
-          <input
-            type="number"
-            class="target-amount-input"
-            title="Result"
-            disabled
-          />
-          <div class="target-flags-box">
-            <select id="target-currency"></select>
+        <div class="right-section">
+          <div class="input-wrapper-to styled-box">
+            <label for="amount-input-to" class="label-to">To</label>
+            <input
+              type="number"
+              id="amount-input-to"
+              class="input-amount-to"
+              title="Result"
+              disabled
+            />
+          </div>
+          <div class="flags-box-to styled-box">
+            <select
+              id="target-currency"
+              class="select-target-currency"
+              aria-label="Target Currency"
+            ></select>
           </div>
         </div>
       </div>
       <p class="exchange-rate-info"></p>
       <p class="error-message"></p>
+      <button class="convert">Convert</button>
     </div>
     <!-- <p>Flagi dostarczone przez <a href="https://flagpedia.net">Flagpedia.net</a></p> -->
     <script src="script.js"></script>

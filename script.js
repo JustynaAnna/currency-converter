@@ -1,12 +1,12 @@
 const baseCurrencySelect = document.querySelector("#base-currency");
-const baseAmountInput = document.querySelector(".amount-input");
+const baseAmountInput = document.querySelector(".input-amount-from");
 const targetCurrencySelect = document.querySelector("#target-currency");
-const targetAmountInput = document.querySelector(".target-amount-input");
+const targetAmountInput = document.querySelector(".input-amount-to");
 const convertBtn = document.querySelector(".convert");
 const swapBtn = document.querySelector(".swap");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
-const baseFlagsBox = document.querySelector(".base-flags-box");
-const targetfetchFlagSvgBox = document.querySelector(".target-flags-box");
+const baseFlagsBox = document.querySelector(".flags-box-from");
+const targetfetchFlagSvgBox = document.querySelector(".flags-box-to");
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835f5ada279b910fcd0";
 

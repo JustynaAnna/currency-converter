@@ -1,3 +1,14 @@
+:root {
+  --body-background: #f7f7f9;
+  --element-height: 3rem;
+  --element-padding: 0.4rem;
+  --element-shadow: 0 10px 10px 0 #676d7573;
+  --element-border: 1px solid #cbc5c5;
+  --element-border-radius: 0.5rem;
+  --paragraph-color: #6e6e73;
+  --button-background: #0776ed;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,9 +16,138 @@
 }
 
 body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: var(--body-background);
+  font-family: Helvetica;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 1.45rem;
+  text-align: center;
+}
+
+.app-wrapper {
+  margin-top: 3rem;
+  padding: 1.1rem;
+}
+
+.app-wrapper p {
+  text-align: center;
+  color: var(--paragraph-color);
+  margin-top: 1.2rem;
+}
+
+.app-body {
+  margin-top: 2.5rem;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.styled-box {
+  display: flex;
+  height: var(--element-height);
+  padding: var(--element-padding);
+  box-shadow: var(--element-shadow);
+  border: var(--element-border);
+  border-radius: var(--element-border-radius);
+}
+
+.input-wrapper-from,
+.input-wrapper-to {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  width: 47%;
+}
+
+.label-from,
+.label-to {
+  font-size: 0.8rem;
+  padding-bottom: 3px;
+}
+
+.input-amount-from,
+.input-amount-to {
+  text-align: end;
+  font-weight: bolder;
+  width: 90%;
+  border: none;
+  background-color: #f7f7f9;
+}
+
+.flags-box-from,
+.flags-box-to {
+  width: 49%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.select-base-currency,
+.select-target-currency {
+  border: none;
+}
+
+.button-wrapper-swap {
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem;
+}
+
+.swap {
+  width: 45%;
+  padding: 0.2rem;
+}
+
+.swap,
+.convert {
+  background-color: var(--button-background);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+
+.swap:hover,
+.convert:hover {
+  background-color: #318beb;
+}
+
+.fas {
+  color: white;
+  font-size: x-large;
+}
+
+.app-wrapper .exchange-rate-info {
+  font-size: large;
+  font-weight: bold;
+  margin-top: 2rem;
+}
+
+.convert {
+  width: 100%;
+  height: 2rem;
+  font-size: medium;
+  color: white;
+}
+/* Dla wiekszych rozmiarów 
+body {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: #293038;
+  background-color: #f7f7f9;
 }
+
+.app-wrapper {
+  box-shadow: 0 10px 20px 0 #b3bbc673;
+  border-radius: 30px;
+  padding: 50px;
+} */
