@@ -34,7 +34,7 @@ h1 {
   padding: 1.1rem;
 }
 
-.app-wrapper p {
+p {
   text-align: center;
   color: var(--paragraph-color);
   margin-top: 1.2rem;
@@ -99,6 +99,13 @@ h1 {
   display: flex;
   justify-content: center;
   margin: 1.5rem;
+}
+
+.input-error,
+.error-message {
+  color: #cd0000;
+  font-size: x-small;
+  margin-bottom: 1.2rem;
 }
 
 .swap {

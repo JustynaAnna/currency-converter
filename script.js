@@ -82,7 +82,7 @@ const validateInputAmount = () => {
   const errorMessage = document.querySelector(".input-error");
   if (!isValid) {
     errorMessage.style.display = "block";
-    errorMessage.textContent = "Please enter a valid amount";
+    errorMessage.textContent = "Numbers only. Please enter a valid amount.";
   } else {
     errorMessage.textContent = "";
     errorMessage.style.display = "none";
