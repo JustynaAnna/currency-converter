@@ -71,7 +71,7 @@ h1 {
 .label-from,
 .label-to {
   font-size: 0.8rem;
-  padding-bottom: 3px;
+  padding-bottom: 0.2rem;
 }
 
 .input-amount-from,
@@ -110,7 +110,7 @@ h1 {
 .convert {
   background-color: var(--button-background);
   border: none;
-  border-radius: 12px;
+  border-radius: 0.6rem;
   cursor: pointer;
   transition: 0.2s linear;
 }
@@ -121,7 +121,7 @@ h1 {
 }
 
 .fas {
-  color: white;
+  color: #ffffff;
   font-size: x-large;
 }
 
@@ -135,7 +135,7 @@ h1 {
   width: 100%;
   height: 2rem;
   font-size: medium;
-  color: white;
+  color: #ffffff;
 }
 /* Dla wiekszych rozmiarów 
 body {
