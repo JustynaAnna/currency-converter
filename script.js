@@ -191,6 +191,7 @@ const updateExchangeDetails = async () => {
   }
 };
 
+baseAmountInput.addEventListener("input", validateInputAmount);
 baseCurrencySelect.addEventListener("change", updateExchangeDetails);
 targetCurrencySelect.addEventListener("change", updateExchangeDetails);
 convertBtn.addEventListener("click", updateExchangeDetails);
