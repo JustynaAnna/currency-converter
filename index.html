@@ -17,6 +17,14 @@
 
       <div class="app-body">
         <div class="left-section">
+          <!-- placeholder="enter amount" -->
+          <div class="flags-box-from styled-box">
+            <select
+              id="base-currency"
+              class="select-base-currency"
+              aria-label="Base Currency"
+            ></select>
+          </div>
           <div class="input-wrapper-from styled-box">
             <label for="amount-input-from" class="label-from">From</label>
             <input
@@ -28,14 +36,6 @@
               title="Please enter the value in the correct format, e.g. 100.00"
             />
           </div>
-          <!-- placeholder="enter amount" -->
-          <div class="flags-box-from styled-box">
-            <select
-              id="base-currency"
-              class="select-base-currency"
-              aria-label="Base Currency"
-            ></select>
-          </div>
         </div>
         <p class="input-error"></p>
         <div class="button-wrapper-swap">
@@ -45,6 +45,13 @@
         </div>
 
         <div class="right-section">
+          <div class="flags-box-to styled-box">
+            <select
+              id="target-currency"
+              class="select-target-currency"
+              aria-label="Target Currency"
+            ></select>
+          </div>
           <div class="input-wrapper-to styled-box">
             <label for="amount-input-to" class="label-to">To</label>
             <input
@@ -54,13 +61,6 @@
               title="Result"
               disabled
             />
-          </div>
-          <div class="flags-box-to styled-box">
-            <select
-              id="target-currency"
-              class="select-target-currency"
-              aria-label="Target Currency"
-            ></select>
           </div>
         </div>
       </div>

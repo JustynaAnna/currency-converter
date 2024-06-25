@@ -47,7 +47,6 @@ p {
 .left-section,
 .right-section {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
 }
 
@@ -145,8 +144,7 @@ p {
   color: #ffffff;
 }
 
-/* Dla wiekszych rozmiarów 
-body {
+/* body {
   height: 100vh;
   display: flex;
   justify-content: center;
