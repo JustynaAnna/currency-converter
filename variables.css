@@ -1,0 +1,10 @@
+:root {
+  --body-background: #f7f7f9;
+  --element-height: 3rem;
+  --element-padding: 0.4rem;
+  --element-shadow: 0 10px 10px 0 #676d7573;
+  --element-border: 1px solid #cbc5c5;
+  --element-border-radius: 0.5rem;
+  --paragraph-color: #6e6e73;
+  --button-background: #0776ed;
+}

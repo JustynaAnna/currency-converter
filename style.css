@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --body-background: #f7f7f9;
   --element-height: 3rem;
   --element-padding: 0.4rem;
@@ -7,8 +7,9 @@
   --element-border-radius: 0.5rem;
   --paragraph-color: #6e6e73;
   --button-background: #0776ed;
-}
+} */
 
+@import url("variables.css");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -28,16 +29,15 @@ h1 {
   font-size: 1.45rem;
   text-align: center;
 }
-
-.app-wrapper {
-  margin-top: 3rem;
-  padding: 1.1rem;
-}
-
 p {
   text-align: center;
   color: var(--paragraph-color);
   margin-top: 1.2rem;
+}
+
+.app-wrapper {
+  margin-top: 3rem;
+  padding: 1.1rem;
 }
 
 .app-body {
@@ -136,24 +136,9 @@ p {
   font-weight: bold;
   margin-top: 2rem;
 }
-
 .convert {
   width: 100%;
   height: 2rem;
   font-size: medium;
   color: #ffffff;
 }
-
-/* body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f7f7f9;
-}
-
-.app-wrapper {
-  box-shadow: 0 10px 20px 0 #b3bbc673;
-  border-radius: 30px;
-  padding: 50px;
-} */

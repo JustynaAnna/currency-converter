@@ -5,8 +5,9 @@ const targetAmountInput = document.querySelector(".input-amount-to");
 const convertBtn = document.querySelector(".convert");
 const swapBtn = document.querySelector(".swap");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
-const baseFlagsBox = document.querySelector(".flags-box-from");
-const targetfetchFlagSvgBox = document.querySelector(".flags-box-to");
+// const baseFlagsBox = document.querySelector(".flags-box-from");
+const fromFlagsBox = document.querySelector(".img-wrapper");
+const toFlagsBox = document.querySelector(".img-wrapper-to");
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835f5ada279b910fcd0";
 
@@ -169,12 +170,8 @@ const displayCountryFlags = async (baseCurrency, targetCurrency) => {
     }
   };
 
-  await updateFlag(baseCurrency, "flag-img-base", baseFlagsBox);
-  await updateFlag(
-    targetCurrency,
-    "flag-img-targetCurrency",
-    targetfetchFlagSvgBox
-  );
+  await updateFlag(baseCurrency, "flag-img-base", fromFlagsBox);
+  await updateFlag(targetCurrency, "flag-img-targetCurrency", toFlagsBox);
 };
 
 const updateExchangeDetails = async () => {
