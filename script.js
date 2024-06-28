@@ -6,8 +6,9 @@ const convertBtn = document.querySelector(".convert");
 const swapBtn = document.querySelector(".swap");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 // const baseFlagsBox = document.querySelector(".flags-box-from");
-const fromFlagsBox = document.querySelector(".img-wrapper");
+const baseFlagsBox = document.querySelector(".img-wrapper");
 const toFlagsBox = document.querySelector(".img-wrapper-to");
+
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835f5ada279b910fcd0";
 
@@ -160,7 +161,9 @@ const displayCountryFlags = async (baseCurrency, targetCurrency) => {
     if (!imgTag) {
       imgTag = document.createElement("img");
       imgTag.className = className;
-      imgTag.style.width = "42px";
+      //wspolna klasa dla img "flag-img", mogę teraz stylizować flagi w CSS
+      imgTag.classList.add("flag-img", className);
+      // imgTag.style.width = "42px";
       container.appendChild(imgTag);
     }
     const flagURL = await fetchFlagSvg(currency);
@@ -170,7 +173,7 @@ const displayCountryFlags = async (baseCurrency, targetCurrency) => {
     }
   };
 
-  await updateFlag(baseCurrency, "flag-img-base", fromFlagsBox);
+  await updateFlag(baseCurrency, "flag-img-base", baseFlagsBox);
   await updateFlag(targetCurrency, "flag-img-targetCurrency", toFlagsBox);
 };
 

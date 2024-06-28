@@ -1,14 +1,3 @@
-/* :root {
-  --body-background: #f7f7f9;
-  --element-height: 3rem;
-  --element-padding: 0.4rem;
-  --element-shadow: 0 10px 10px 0 #676d7573;
-  --element-border: 1px solid #cbc5c5;
-  --element-border-radius: 0.5rem;
-  --paragraph-color: #6e6e73;
-  --button-background: #0776ed;
-} */
-
 @import url("variables.css");
 * {
   box-sizing: border-box;
@@ -92,6 +81,10 @@ p {
 .select-base-currency,
 .select-target-currency {
   border: none;
+  background-color: #f7f7f9;
+}
+.flag-img {
+  width: 42px;
 }
 
 .button-wrapper-swap {
@@ -141,4 +134,78 @@ p {
   height: 2rem;
   font-size: medium;
   color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .flag-img {
+    width: 35px;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    align-items: center;
+    background-color: #efefeffb;
+  }
+
+  .app-wrapper {
+    box-shadow: 0 20px 20px 0 #b3bbc65d;
+    border-radius: 30px;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f9;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: large;
+  }
+
+  .app-body {
+    width: 70%;
+  }
+
+  .left-section,
+  .right-section {
+    align-items: center;
+    border: 1px solid #c8c6c6;
+    border-radius: 10px;
+  }
+
+  .styled-box {
+    align-items: center;
+    flex-direction: row;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .flags-box-from,
+  .flags-box-to {
+    width: 45%;
+    border-right: 1px solid #c8c6c6;
+    padding-left: 10px;
+  }
+
+  .input-wrapper-from,
+  .input-wrapper-to {
+    width: auto;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  .input-error,
+  .error-message {
+    font-size: small;
+  }
+
+  .convert {
+    width: 70%;
+    font-size: large;
+  }
 }
