@@ -62,6 +62,10 @@ p {
   padding-bottom: 0.2rem;
 }
 
+.input-amount-from {
+  cursor: pointer;
+}
+
 .input-amount-from,
 .input-amount-to {
   text-align: end;
@@ -69,6 +73,10 @@ p {
   width: 90%;
   border: none;
   background-color: #f7f7f9;
+}
+
+.focusable:focus {
+  outline: 2px solid #318beb;
 }
 
 .flags-box-from,
@@ -82,7 +90,9 @@ p {
 .select-target-currency {
   border: none;
   background-color: #f7f7f9;
+  cursor: pointer;
 }
+
 .flag-img {
   width: 42px;
 }
