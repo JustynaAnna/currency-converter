@@ -45,12 +45,15 @@ const fetchFlagSvg = async (currency) => {
     const apiURL = `https://restcountries.com/v3.1/currency/${currency}`;
 
     const flagsSvgData = await fetchDataFromAPI(apiURL);
+    console.log(flagsSvgData);
     if (!flagsSvgData[0]?.flags?.svg) {
       throw new Error(`Flag not found for currency ${currency}.`);
     }
     const flagSVG = flagsSvgData[0].flags.svg;
-    flagCache[currency] = flagSVG;
-    return flagSVG;
+    const countryName = flagsSvgData[0].altSpellings[1] || currency;
+    flagCache[currency] = { flagSVG, countryName };
+    console.log(countryName);
+    return { flagSVG, countryName };
   } catch (error) {
     console.error(error);
     return null; // Zwraca null, aby zamiast rzucenia błędu program mógł nadal się wykonywać
@@ -163,13 +166,13 @@ const displayCountryFlags = async (baseCurrency, targetCurrency) => {
       imgTag.className = className;
       //wspolna klasa dla img "flag-img", mogę teraz stylizować flagi w CSS
       imgTag.classList.add("flag-img", className);
-      // imgTag.style.width = "42px";
       container.appendChild(imgTag);
     }
-    const flagURL = await fetchFlagSvg(currency);
-    if (flagURL) {
-      imgTag.src = flagURL;
-      imgTag.alt = currency;
+
+    const flagData = await fetchFlagSvg(currency);
+    if (flagData) {
+      imgTag.src = flagData.flagSVG;
+      imgTag.alt = flagData.countryName;
     }
   };
 

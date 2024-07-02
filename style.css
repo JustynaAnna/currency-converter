@@ -76,7 +76,7 @@ p {
 }
 
 .focusable:focus {
-  outline: 2px solid #318beb;
+  outline: 0.1rem solid #0047ab;
 }
 
 .flags-box-from,
@@ -94,7 +94,7 @@ p {
 }
 
 .flag-img {
-  width: 42px;
+  width: 2.1rem;
 }
 
 .button-wrapper-swap {
@@ -105,8 +105,8 @@ p {
 
 .input-error,
 .error-message {
-  color: #cd0000;
-  font-size: x-small;
+  color: #ae0000;
+  font-size: small;
   margin-bottom: 1.2rem;
 }
 
@@ -126,7 +126,7 @@ p {
 
 .swap:hover,
 .convert:hover {
-  background-color: #318beb;
+  background-color: #0158d1;
 }
 
 .fas {
@@ -148,7 +148,7 @@ p {
 
 @media (max-width: 480px) {
   .flag-img {
-    width: 35px;
+    width: 1.65rem;
   }
 }
 
@@ -159,9 +159,9 @@ p {
   }
 
   .app-wrapper {
-    box-shadow: 0 20px 20px 0 #b3bbc65d;
-    border-radius: 30px;
-    padding: 50px;
+    box-shadow: 0 1.2rem 1.2rem 0 #b3bbc65d;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -184,7 +184,7 @@ p {
   .right-section {
     align-items: center;
     border: 1px solid #c8c6c6;
-    border-radius: 10px;
+    border-radius: 0.5rem;
   }
 
   .styled-box {
@@ -199,7 +199,7 @@ p {
   .flags-box-to {
     width: 45%;
     border-right: 1px solid #c8c6c6;
-    padding-left: 10px;
+    /* padding-left: 0.5rem; */
   }
 
   .input-wrapper-from,
