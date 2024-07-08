@@ -127,6 +127,7 @@ p {
 .swap:hover,
 .convert:hover {
   background-color: #0158d1;
+  background-color: #005a9c;
 }
 
 .fas {
@@ -209,10 +210,10 @@ p {
     align-items: end;
   }
 
-  .input-error,
+  /* .input-error,
   .error-message {
     font-size: small;
-  }
+  } */
 
   .convert {
     width: 70%;

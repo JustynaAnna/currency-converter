@@ -189,7 +189,6 @@ const updateExchangeDetails = async () => {
     calculateExchangeRate(currencyData, baseCurrency, targetCurrency);
     validateInputAmount();
   } catch (error) {
-    const errorMessage = document.querySelector(".error-message");
     errorMessage.textContent = error.message;
   }
 };

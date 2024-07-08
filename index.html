@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <!-- crossorigin="anonymous",tzn. przeglądarka pobiera zasób z innego 
+      serwera w bezpieczny sposób, 
+      bez przesyłania żadnych dodatkowych informacji o użytkowniku. -->
     <script
       src="https://kit.fontawesome.com/7c39d39f84.js"
       crossorigin="anonymous"
@@ -33,14 +36,23 @@
               class="input-amount-from focusable"
               value="1"
               inputmode="tel"
-              title="Please enter the value in the correct format, e.g. 100.00"
+              title="Please enter the value in the correct format, e.g. 100.00."
             />
+            <div id="amount-format" class="sr-only">
+              Please enter the value in the correct format. Use numbers only,
+              e.g. 100.00.
+            </div>
           </div>
         </div>
-        <p class="input-error"></p>
+        <p class="input-error" role="alert" aria-live="assertive"></p>
         <div class="button-wrapper-swap">
-          <button class="swap" title="Switch currencies" type="button">
-            <i class="fas fa-retweet"></i>
+          <button
+            class="swap"
+            type="button"
+            title="Switch currencies"
+            aria-label="Switch currencies"
+          >
+            <i class="fas fa-retweet" aria-hidden="true"></i>
           </button>
         </div>
 
@@ -60,22 +72,23 @@
               id="amount-input-to"
               class="input-amount-to"
               title="Result"
+              aria-label="Result of currency conversion"
               disabled
             />
           </div>
         </div>
       </div>
-      <p class="exchange-rate-info"></p>
-      <p class="error-message"></p>
+      <p class="exchange-rate-info" aria-live="polite"></p>
+      <p class="error-message" role="alert" aria-live="assertive"></p>
       <button
         class="convert"
         type="button"
         title="Click to convert the entered amount"
+        aria-label="Convert"
       >
         Convert
       </button>
     </div>
-    <!-- <p>Flagi dostarczone przez <a href="https://flagpedia.net">Flagpedia.net</a></p> -->
     <script src="script.js"></script>
   </body>
 </html>
