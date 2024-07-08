@@ -8,7 +8,6 @@ const exchangeRateInfo = document.querySelector(".exchange-rate-info");
 // const baseFlagsBox = document.querySelector(".flags-box-from");
 const baseFlagsBox = document.querySelector(".img-wrapper");
 const toFlagsBox = document.querySelector(".img-wrapper-to");
-
 const errorMessage = document.querySelector(".error-message");
 const apiKey = "ae187835f5ada279b910fcd0";
 
