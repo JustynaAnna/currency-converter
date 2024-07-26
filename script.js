@@ -5,7 +5,6 @@ const targetAmountInput = document.querySelector(".input-amount-to");
 const convertBtn = document.querySelector(".convert");
 const swapBtn = document.querySelector(".swap");
 const exchangeRateInfo = document.querySelector(".exchange-rate-info");
-// const baseFlagsBox = document.querySelector(".flags-box-from");
 const baseFlagsBox = document.querySelector(".img-wrapper");
 const toFlagsBox = document.querySelector(".img-wrapper-to");
 const errorMessage = document.querySelector(".error-message");
@@ -42,9 +41,9 @@ const fetchFlagSvg = async (currency) => {
       return flagCache[currency];
     }
     const apiURL = `https://restcountries.com/v3.1/currency/${currency}`;
-
     const flagsSvgData = await fetchDataFromAPI(apiURL);
     console.log(flagsSvgData);
+
     if (!flagsSvgData[0]?.flags?.svg) {
       throw new Error(`Flag not found for currency ${currency}.`);
     }
