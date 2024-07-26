@@ -12,7 +12,7 @@ const apiKey = "ae187835f5ada279b910fcd0";
 
 const fetchExchangeRates = async () => {
   const baseCurrency = baseCurrencySelect.value || "PLN";
-  const targetCurrency = targetCurrencySelect.value || "EUR";
+  const targetCurrency = targetCurrencySelect.value || "USD";
   const apiUrl = `https://open.er-api.com/v6/latest/${baseCurrency}?apikey=${apiKey}`;
 
   try {
