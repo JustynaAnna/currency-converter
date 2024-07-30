@@ -1,10 +1,3 @@
-export const currencyPriority = {
-  GBP: "GB",
-  USD: "US",
-  AUD: "AU",
-  EUR: "NL",
-};
-
 export const validateInputAmount = () => {
   const baseAmountInput = document.querySelector(".input-amount-from");
   const inputValue = baseAmountInput.value;
