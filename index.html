@@ -1,95 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- usunac ukosniki w samozamykajacych sie tagach -->
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <!-- crossorigin="anonymous",tzn. przeglądarka pobiera zasób z innego 
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Convert currencies in real-time with our currency converter. Check exchange rates and make accurate conversions easily.">
+
+  <link rel="stylesheet" href="style.css">
+  <!-- crossorigin="anonymous",tzn. przeglądarka pobiera zasób z innego 
       serwera w bezpieczny sposób, 
       bez przesyłania żadnych dodatkowych informacji o użytkowniku. -->
-    <script
-      src="https://kit.fontawesome.com/7c39d39f84.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>Currency Converter</title>
-  </head>
-  <body>
-    <div class="app-wrapper">
-      <h1>Currency Converter</h1>
-      <p>Select currencies and check the exchange rate</p>
+  <script src="https://kit.fontawesome.com/7c39d39f84.js" crossorigin="anonymous"></script>
+  <title>Currency Converter</title>
+</head>
 
-      <div class="app-body">
-        <div class="left-section">
-          <div class="flags-box-from styled-box">
-            <select
-              id="base-currency"
-              class="select-base-currency focusable"
-              aria-label="Base Currency"
-            ></select>
-            <div class="img-wrapper"></div>
-          </div>
-          <div class="input-wrapper-from styled-box">
-            <label for="amount-input-from" class="label-from">From</label>
-            <input
-              type="text"
-              id="amount-input-from"
-              class="input-amount-from focusable"
-              value="1"
-              inputmode="tel"
-              title="Please enter the value in the correct format, e.g. 100.00."
-            />
-            <div id="amount-format" class="sr-only">
-              Please enter the value in the correct format. Use numbers only,
-              e.g. 100.00.
-            </div>
-          </div>
-        </div>
-        <p class="input-error" role="alert" aria-live="assertive"></p>
-        <div class="button-wrapper-swap">
-          <button
-            class="swap"
-            type="button"
-            title="Switch currencies"
-            aria-label="Switch currencies"
-          >
-            <i class="fas fa-retweet" aria-hidden="true"></i>
-          </button>
-        </div>
+<body>
+  <div class="app-wrapper">
+    <h1>Currency Converter</h1>
+    <p>Select currencies and check the exchange rate</p>
 
-        <div class="right-section">
-          <div class="flags-box-to styled-box">
-            <select
-              id="target-currency"
-              class="select-target-currency focusable"
-              aria-label="Target Currency"
-            ></select>
-            <div class="img-wrapper-to"></div>
-          </div>
-          <div class="input-wrapper-to styled-box">
-            <label for="amount-input-to" class="label-to">To</label>
-            <input
-              type="number"
-              id="amount-input-to"
-              class="input-amount-to"
-              title="Result"
-              aria-label="Result of currency conversion"
-              disabled
-            />
+    <div class="app-body">
+      <div class="left-section">
+        <div class="flags-box-from styled-box">
+          <select id="base-currency" class="select-base-currency focusable" aria-label="Base Currency"></select>
+          <div class="img-wrapper"></div>
+        </div>
+        <div class="input-wrapper-from styled-box">
+          <label for="amount-input-from" class="label-from">From</label>
+          <input type="tel" id="amount-input-from" class="input-amount-from focusable" value="1"
+            title="Please enter the value in the correct format, e.g. 100.00">
+          <div id="amount-format" class="sr-only">
+            Please enter the value in the correct format. Use numbers only,
+            e.g. 100.00.
           </div>
         </div>
       </div>
-      <p class="exchange-rate-info" aria-live="polite"></p>
-      <p class="error-message" role="alert" aria-live="assertive"></p>
-      <button
-        class="convert"
-        type="button"
-        title="Click to convert the entered amount"
-        aria-label="Convert"
-      >
-        Convert
-      </button>
+      <p class="input-error" role="alert" aria-live="assertive"></p>
+      <div class="button-wrapper-swap">
+        <button class="swap" type="button" title="Switch currencies" aria-label="Switch currencies">
+          <i class="fas fa-retweet" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="right-section">
+        <div class="flags-box-to styled-box">
+          <select id="target-currency" class="select-target-currency focusable" aria-label="Target Currency"></select>
+          <div class="img-wrapper-to"></div>
+        </div>
+        <div class="input-wrapper-to styled-box">
+          <label for="amount-input-to" class="label-to">To</label>
+          <input type="number" id="amount-input-to" class="input-amount-to" title="Result"
+            aria-label="Result of currency conversion" disabled>
+        </div>
+      </div>
     </div>
-    <script type="module" src="src/main.js"></script>
-  </body>
+    <p class="exchange-rate-info" aria-live="polite"></p>
+    <p class="error-message" role="alert" aria-live="assertive"></p>
+    <button class="convert" type="button" title="Click to convert the entered amount" aria-label="Convert">
+      Convert
+    </button>
+  </div>
+  <script type="module" src="src/main.js"></script>
+</body>
+
 </html>
